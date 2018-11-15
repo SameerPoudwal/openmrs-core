@@ -931,7 +931,17 @@ public class ServiceContext implements ApplicationContextAware {
 	 */
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) {
-		this.applicationContext = applicationContext;
+		
+		if(this.applicationContext == null){
+			
+			synchronized (ApplicationContext.class){
+				if(this.applicationContext == null){
+					this.applicationContext = applicationContext;
+				}
+			}
+			
+		}
+		
 	}
 	
 	public ApplicationContext getApplicationContext() {
