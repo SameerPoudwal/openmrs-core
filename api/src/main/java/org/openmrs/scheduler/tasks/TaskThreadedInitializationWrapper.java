@@ -74,7 +74,7 @@ public class TaskThreadedInitializationWrapper implements Task {
 	 *      thread.
 	 */
 	@Override
-	public void initialize(final TaskDefinition config) {
+	public synchronized void initialize(final TaskDefinition config) {
 		Runnable r = () -> {
 			lock.lock();
 			try {
