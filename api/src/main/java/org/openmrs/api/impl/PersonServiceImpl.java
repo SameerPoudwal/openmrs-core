@@ -643,6 +643,11 @@ public class PersonServiceImpl extends BaseOpenmrsService implements PersonServi
 		// trim off all trailing commas
 		while (name.endsWith(",")) {
 			name = name.substring(0, name.length() - 1);
+			//replace the angular brackets of the script tags HTML entity name
+			name.replaceAll("(?i)<(/?script[^>]*)>", "&lt;$1&gt;");
+			name.replaceAll("(?i)<(/?javascript[^>]*)>", "&lt;$1&gt;");
+			//remove the event calls
+			name.replaceAll("(?i)<.*?\\s+on.*?>.*?</.*?>", "");
 		}
 		
 		String firstName = name;
